@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin")
 module.exports = {
   target: "electron-renderer",
   resolve: {
-    extensions: [".ts", ".tsx", ".js"],
+    extensions: [".ts", ".tsx", ".js", "json"],
     alias: {
       "react-dom": "@hot-loader/react-dom",
     },

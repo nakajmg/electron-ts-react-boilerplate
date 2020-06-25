@@ -12,6 +12,7 @@
   "name": "electron-ts-react-boilerplate",
   "private": true,
   "devDependencies": {
+    "@hot-loader/react-dom": "^16.13.0",
     "@types/axios": "^0.14.0",
     "@types/lodash.throttle": "^4.1.6",
     "@types/markdown-it": "^10.0.1",

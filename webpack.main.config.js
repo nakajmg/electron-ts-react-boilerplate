@@ -3,9 +3,9 @@ const path = require("path")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 
 module.exports = {
-  target: "electron-main",
+  target: "electron-renderer",
   entry: {
-    main: "./src/main.ts",
+    main: "./src/main/main.ts",
   },
   cache: true,
   mode: "development",
@@ -13,6 +13,10 @@ module.exports = {
   output: {
     path: path.join(__dirname, "dist"),
     filename: "[name].js",
+  },
+  node: {
+    __dirname: false,
+    __filename: false,
   },
   module: {
     rules: [
@@ -23,11 +27,9 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: [".ts", ".tsx", ".js"],
+    extensions: [".ts", ".tsx", ".js", "json"],
   },
   plugins: [
-    new webpack.NamedModulesPlugin(),
-    new HtmlWebpackPlugin(),
     new webpack.DefinePlugin({
       "process.env.NODE_ENV": JSON.stringify(
         process.env.NODE_ENV || "development"
