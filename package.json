@@ -1,4 +1,14 @@
 {
+  "scripts": {
+    "release-mac": "electron-builder --mac --x64",
+    "release-win": "electron-builder --win --x64",
+    "build": "NODE_ENV=production webpack",
+    "dev": "npm run start-renderer-dev",
+    "start": "electron ./",
+    "start-renderer-dev": "webpack-dev-server --config webpack.renderer.dev.config.js",
+    "start-main-dev": "webpack --config webpack.main.config.js && electron ./dist/main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "name": "electron-ts-react-boilerplate",
   "private": true,
   "devDependencies": {
@@ -11,14 +21,20 @@
     "@types/react-redux": "^7.1.7",
     "@types/redux": "^3.6.0",
     "@types/styled-components": "^5.1.0",
+    "dotenv": "^8.2.0",
     "electron": "^8.2.3",
     "electron-builder": "^22.6.1",
+    "electron-devtools-installer": "^3.0.0",
     "electron-notarize": "^1.0.0",
+    "html-webpack-plugin": "^4.3.0",
     "prettier": "^2.0.5",
+    "react-hot-loader": "^4.12.21",
     "ts-loader": "^7.0.1",
     "typescript": "^3.8.3",
     "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11"
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^4.2.2"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.28",
