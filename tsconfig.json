@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "ESNext",
+    "jsx": "react",
+    "outDir": "./dist",
+    "strict": true,
+    "esModuleInterop": true,
+    "sourceRoot": "./src",
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "inlineSources": true,
+    "types": ["react", "node"],
+    "lib": ["es2018", "es2019", "dom"],
+    "typeRoots": ["node_modules/@types", "typing/"]
+  },
+  "include": ["./src/**/*", "typings"]
+}
