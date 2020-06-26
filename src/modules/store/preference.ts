@@ -5,7 +5,12 @@ import { PreferenceStore } from "../../models/store"
 
 const initialState: PreferenceStore = electronStore.get(
   ELECTRON_STORE_KEYS.PREFERENCE
-)
+) || {
+  id: "",
+  pass: "",
+  subDomain: "",
+  notify: false,
+}
 
 window.$electronStore = electronStore
 

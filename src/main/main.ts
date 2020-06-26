@@ -2,6 +2,10 @@ import { app, BrowserWindow, ipcMain } from "electron"
 import * as path from "path"
 import * as url from "url"
 import EVENT_NAMES from "../constants/eventNames"
+import installExtension, {
+  REACT_DEVELOPER_TOOLS,
+  REDUX_DEVTOOLS,
+} from "electron-devtools-installer"
 
 ipcMain.on(EVENT_NAMES.UPDATE_PREFERENCE, () => {
   appWindow?.webContents.send(EVENT_NAMES.UPDATE_PREFERENCE)
@@ -10,9 +14,15 @@ ipcMain.on(EVENT_NAMES.UPDATE_PREFERENCE, () => {
 let appWindow: BrowserWindow | null
 
 const createWindow = async () => {
-  // if (process.env.NODE_ENV !== 'production') {
-  //     await installExtensions();
-  // }
+  if (process.env.NODE_ENV !== "production") {
+    app.whenReady().then(() => {
+      return Promise.all(
+        [REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS].map((name) =>
+          installExtension(name)
+        )
+      ).catch(console.log) // eslint-disable-line no-console
+    })
+  }
 
   appWindow = new BrowserWindow({
     width: 800,
@@ -37,9 +47,9 @@ const createWindow = async () => {
 
   if (process.env.NODE_ENV !== "production") {
     // Open DevTools, see https://github.com/electron/electron/issues/12438 for why we wait for dom-ready
-    appWindow.webContents.once("dom-ready", () => {
-      appWindow!.webContents.openDevTools()
-    })
+    // appWindow.webContents.once("dom-ready", () => {
+    //   appWindow!.webContents.openDevTools()
+    // })
   }
 
   appWindow.on("closed", () => {
