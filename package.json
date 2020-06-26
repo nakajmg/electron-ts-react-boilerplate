@@ -2,10 +2,11 @@
   "main": "./dist/main.js",
   "scripts": {
     "dev": "npm run dev-renderer",
-    "dev-renderer": "webpack-dev-server --config webpack.renderer.dev.config.js",
-    "dev-main": "webpack --config webpack.main.config.js && electron ./dist/main.js",
-    "start": "electron ./",
-    "build": "NODE_ENV=production webpack",
+    "dev-renderer": "webpack-dev-server --config config/webpack.renderer.dev.config.js",
+    "dev-main": "webpack --config config/webpack.main.config.js && electron ./dist/main.js",
+    "build": "npm run build-main && npm run build-renderer",
+    "build-main": "NODE_ENV=production webpack --config config/webpack.main.prod.config.js",
+    "build-renderer": "NODE_ENV=production webpack --config config/webpack.renderer.prod.config.js",
     "release-mac": "electron-builder --mac --x64",
     "release-win": "electron-builder --win --x64",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -71,8 +72,8 @@
       "icon": "./icon/icon.icns",
       "gatekeeperAssess": false,
       "hardenedRuntime": true,
-      "entitlements": "./src/entitlements.mac.inherit.plist",
-      "entitlementsInherit": "./src/entitlements.mac.inherit.plist"
+      "entitlements": "./entitlements.mac.inherit.plist",
+      "entitlementsInherit": "./entitlements.mac.inherit.plist"
     },
     "win": {
       "icon": "./icon/icon.ico",
