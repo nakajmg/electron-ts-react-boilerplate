@@ -1,12 +1,13 @@
 {
+  "main": "./dist/main.js",
   "scripts": {
+    "dev": "npm run dev-renderer",
+    "dev-renderer": "webpack-dev-server --config webpack.renderer.dev.config.js",
+    "dev-main": "webpack --config webpack.main.config.js && electron ./dist/main.js",
+    "start": "electron ./",
+    "build": "NODE_ENV=production webpack",
     "release-mac": "electron-builder --mac --x64",
     "release-win": "electron-builder --win --x64",
-    "build": "NODE_ENV=production webpack",
-    "dev": "npm run start-renderer-dev",
-    "start": "electron ./",
-    "start-renderer-dev": "webpack-dev-server --config webpack.renderer.dev.config.js",
-    "start-main-dev": "webpack --config webpack.main.config.js && electron ./dist/main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "name": "electron-ts-react-boilerplate",
