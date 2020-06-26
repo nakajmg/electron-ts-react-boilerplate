@@ -12,7 +12,8 @@
     "inlineSources": true,
     "types": ["react", "node"],
     "lib": ["es2018", "es2019", "dom"],
-    "typeRoots": ["node_modules/@types", "typing/"]
+    "typeRoots": ["node_modules/@types", "typings/"]
   },
-  "include": ["./src/**/*", "typings"]
+  "include": ["./src/**/*", "typings"],
+  "exclude": ["node_modules"]
 }

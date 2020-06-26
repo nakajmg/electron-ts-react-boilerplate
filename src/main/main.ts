@@ -1,15 +1,20 @@
-import { app, BrowserWindow } from "electron"
+import { app, BrowserWindow, ipcMain } from "electron"
 import * as path from "path"
 import * as url from "url"
+import EVENT_NAMES from "../constants/eventNames"
 
-let win: BrowserWindow | null
+ipcMain.on(EVENT_NAMES.UPDATE_PREFERENCE, () => {
+  appWindow?.webContents.send(EVENT_NAMES.UPDATE_PREFERENCE)
+})
+
+let appWindow: BrowserWindow | null
 
 const createWindow = async () => {
   // if (process.env.NODE_ENV !== 'production') {
   //     await installExtensions();
   // }
 
-  win = new BrowserWindow({
+  appWindow = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
@@ -19,9 +24,9 @@ const createWindow = async () => {
 
   if (process.env.NODE_ENV !== "production") {
     process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = "1" // eslint-disable-line require-atomic-updates
-    win.loadURL(`http://localhost:2003`)
+    appWindow.loadURL(`http://localhost:2003`)
   } else {
-    win.loadURL(
+    appWindow.loadURL(
       url.format({
         pathname: path.join(__dirname, "index.html"),
         protocol: "file:",
@@ -32,13 +37,13 @@ const createWindow = async () => {
 
   if (process.env.NODE_ENV !== "production") {
     // Open DevTools, see https://github.com/electron/electron/issues/12438 for why we wait for dom-ready
-    win.webContents.once("dom-ready", () => {
-      win!.webContents.openDevTools()
+    appWindow.webContents.once("dom-ready", () => {
+      appWindow!.webContents.openDevTools()
     })
   }
 
-  win.on("closed", () => {
-    win = null
+  appWindow.on("closed", () => {
+    appWindow = null
   })
 }
 
@@ -51,7 +56,7 @@ app.on("window-all-closed", () => {
 })
 
 app.on("activate", () => {
-  if (win === null) {
+  if (appWindow === null) {
     createWindow()
   }
 })
